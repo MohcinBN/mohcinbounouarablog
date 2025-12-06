@@ -17,9 +17,10 @@ class PostFactory extends Factory
     public function definition(): array
     {
         return [
-            'id' => fake()->uuid(),
+            'id' => null,
             'title' => fake()->sentence(6),
             'slug' => fake()->slug(6),
+            'user_id' => 1, // We'll update this in the seeder
             'excerpt' => fake()->text(100),
             'featured_image' => fake()->imageUrl(640, 480, 'nature'),
             'content' => fake()->text(1000),
