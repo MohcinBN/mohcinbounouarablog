@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
+import FlashMessage from '@/Components/FlashMessage.vue';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
@@ -12,6 +13,7 @@ const showingNavigationDropdown = ref(false);
 
 <template>
     <div>
+        <FlashMessage />
         <div class="min-h-screen bg-gray-100">
             <nav
                 class="border-b border-gray-100 bg-white"
@@ -38,6 +40,12 @@ const showingNavigationDropdown = ref(false);
                                     :active="route().current('dashboard')"
                                 >
                                     Dashboard
+                                </NavLink>
+                                <NavLink
+                                    :href="route('posts.index')"
+                                    :active="route().current('posts.index')"
+                                >
+                                    Posts
                                 </NavLink>
                             </div>
                         </div>
