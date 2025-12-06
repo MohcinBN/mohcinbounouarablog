@@ -12,9 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('posts', function (Blueprint $table) {
-            $table->uuid()->primary();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('comment_id')->constrained('comments')->onDelete('cascade');
+            $table->uuid('id')->primary();
+            $table->uuid('user_id');
             $table->string('title');
             $table->string('slug')->unique();
             $table->string('excerpt')->nullable();
@@ -22,6 +21,11 @@ return new class extends Migration
             $table->text('content');
             $table->enum('status', ['published', 'draft'])->default('draft');
             $table->timestamps();
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
         });
     }
 
