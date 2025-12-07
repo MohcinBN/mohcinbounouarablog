@@ -47,9 +47,7 @@ const props = defineProps({
 
                         <div class="prose max-w-none">
                             <p class="text-lg text-gray-600 mb-6">{{ post.excerpt }}</p>
-                            <div class="mt-6 text-gray-800">
-                                {{ post.content }}
-                            </div>
+                            <div class="mt-6 text-gray-800" v-html="post.content"></div>
                         </div>
                     </div>
                 </div>

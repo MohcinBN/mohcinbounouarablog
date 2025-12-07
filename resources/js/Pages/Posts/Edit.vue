@@ -5,6 +5,7 @@ import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
+import RichTextEditor from '@/Components/RichTextEditor.vue';
 
 const props = defineProps({
     post: {
@@ -83,14 +84,12 @@ const submit = () => {
 
                             <div>
                                 <InputLabel for="content" value="Content" />
-                                <textarea
+                                <RichTextEditor
                                     id="content"
-                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                                     v-model="form.content"
-                                    rows="10"
+                                    :error="form.errors.content"
                                     required
-                                ></textarea>
-                                <InputError class="mt-2" :message="form.errors.content" />
+                                />
                             </div>
 
                             <div>
