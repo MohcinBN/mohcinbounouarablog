@@ -102,4 +102,37 @@ class PostController extends Controller
         $post->delete();
         return redirect()->route('posts.index')->with('message', 'Post deleted successfully.');
     }
+
+    public function viewPost(Post $post)
+    {
+        $props = [
+            'singlePost' => $post->only(
+                'id',
+                'title',
+                'content',
+                'excerpt',
+                'featured_image',
+                'created_at'
+            ),
+        ];
+        return Inertia::render('singlePost', $props);
+    }
+
+    public function publicPostsList() {
+        return Inertia::render('publicPostsList', [
+            'publicPosts' => Post::with('user')
+                ->latest()
+                ->paginate(10)
+                ->through(fn ($post) => [
+                    'id' => $post->id,
+                    'title' => $post->title,
+                    'slug' => $post->slug,
+                    'excerpt' => $post->excerpt,
+                    'featured_image' => $post->featured_image,
+                    'status' => $post->status,
+                    'created_at' => $post->created_at,
+                    'author' => $post->user->name
+                ])
+        ]);
+    }
 }

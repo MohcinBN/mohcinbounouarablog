@@ -29,4 +29,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/upload-image', [ImageUploadController::class, 'store'])->name('image.upload');
 });
 
+// Public routes
+Route::get('/blog', [PostController::class, 'publicPostsList'])->name('posts.public');
+Route::get('/blog/{post:slug}', [PostController::class, 'viewPost'])->name('post.public');
+
 require __DIR__.'/auth.php';
